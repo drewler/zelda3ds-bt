@@ -1,0 +1,53 @@
+// GAR file parser
+// Author: @drewler
+// Based on info from @xdanieldzd's N3DSCmbViewer
+
+LittleEndian();
+
+typedef struct {
+    uint number_files_with_type;
+    uint file_number_index_offset;
+    uint file_type_name_offset;
+    uint unknown00;
+} FILE_TYPE;
+
+typedef struct {
+    uint file_size;
+    uint file_name_offset;
+    uint full_path_offset;
+} FILE_INFO;
+
+typedef struct {
+    uchar raw_file[file_info[i].file_size];
+} RAW_DATA;
+
+typedef struct {
+    char magic[4];
+    uint archive_size;
+    ushort number_file_types;
+    ushort number_files;
+    uint file_types_offset;
+    uint file_info_index_offset;
+    uint file_index_offset;
+    char codename[8];
+    local int i = 0;
+    local int saved_position = FTell();
+    FSeek(file_types_offset);
+    for(i = 0; i < number_file_types; i++){
+        FILE_TYPE file_type;
+    }
+    FSeek(file_info_index_offset);
+    for(i = 0; i < number_files; i++){
+        FILE_INFO file_info;
+    }
+    FSeek(file_index_offset);
+    for(i = 0; i < number_files; i++){
+        uint file_offset;
+    }
+    for(i = 0; i < number_files; i++){
+        FSeek(file_offset[i]);
+        RAW_DATA file_data;
+    }
+} GAR;
+
+GAR gar;
