@@ -1,0 +1,47 @@
+// CMB struct parser
+// Author: @drewler
+// Based on info from @xdanieldzd's N3DSCmbViewer
+
+LittleEndian();
+
+typedef struct {
+    uchar bone_id;
+    uchar unknown00;
+    uchar parent_id;
+    uchar unknown01;
+    float scale[3];
+    float rotation[3];
+    float translation[3];
+    uint unknown02;
+} BONE;
+
+typedef struct {
+    char magic[4];
+    uint unknown00;
+    uint bone_count;
+    uint unknown01;
+    BONE bone[bone_count];
+} SKL;
+
+typedef struct {
+    local uint cmb_start = FTell();                            
+    char magic[4];
+    uint unknown00;
+    uint unknown01;
+    uint unknown02;
+    char name[16];
+    uint unknown03;
+    uint skl_offset;
+    uint qtrs_offset;
+    uint tex_offset;
+    uint sklm_offset;
+    uint luts_offset;
+    uint vatr_offset;
+    uint vertex_offset;
+    uint texture_offset;
+    uint unknown04;
+    FSeek(cmb_start + skl_offset);
+    SKL skl;
+    FSeek(cmb_start + qtrs_offset);
+    
+} CMB;
