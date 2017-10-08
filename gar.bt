@@ -48,8 +48,6 @@ typedef struct {
         ReadBytes(tmp_magic, FTell(), 4);
         if(tmp_magic == "cmb\x20"){
             CMB cmb;
-        } else {
-            CMB cmb;
         }
     }
 } GAR;
