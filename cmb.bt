@@ -54,6 +54,46 @@ typedef struct {
 } TEX;
 
 typedef struct {
+    uint datalength;
+    uint unknown00;
+    ushort unknown01;
+    ushort unknown02;
+    ushort unknown03;
+    ushort unknown04;
+    uint unknown05;
+    uint unknown06;
+    uint unknown07;
+    uint unknown08;
+    uint unknown09;
+} MSHS;
+
+typedef struct {
+    //...
+} SEPD;
+
+typedef struct {
+    uint datalength;
+    uint n_sepd;
+    uint unknown00;
+    ushort sepd_offset[n_sepd];
+    local int i;
+    for(i = 0; i < n_sepd; i++){
+        SEPD sepd;
+    }
+} SHP;
+
+typedef struct {
+    local uint sklm_start = FTell();
+    uint datalength;
+    uint mshs_offset;
+    uint shp_offset;
+    FSeek(sklm_start + mshs_offset);
+    MSHS mshs;
+    FSeek(sklm_start + shp_offset);
+    SHP shp;
+} SKLM;
+
+typedef struct {
     char magic[4];
     switch(magic){
         case "skl\x20":
@@ -67,6 +107,8 @@ typedef struct {
             TEX tex;
             break;
         case "sklm":
+            SKLM sklm;
+            break;
         case "luts":
         case "vatr":
         case "\x00\x00\x01\x00": // Vertex data
