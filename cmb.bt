@@ -68,7 +68,23 @@ typedef struct {
 } MSHS;
 
 typedef struct {
-    //...
+    uint datalength;
+    ushort n_prms;
+    ushort unknown00;
+    float unknown01;
+    float unknown02;
+    float unknown03;
+    uint unknown04;
+    uint unknown05;
+    uint unknown06;
+    uint offset[9];
+    float scale[9];
+    uint datatype[9];
+    uint unknown07[9];
+    uint unknown08[9];
+    uint unknown09[9];
+    uint unknown10[9];
+    uint unknown11[3];
 } SEPD;
 
 typedef struct {
