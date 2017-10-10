@@ -23,6 +23,37 @@ typedef struct {
 } SKL;
 
 typedef struct {
+    uint unknown00;
+    uint unknown01;
+    uint unknown02;
+    uint unknown03;
+    ushort textureid0;
+    ushort unknown04;
+    ushort textureminfilter0;
+    ushort texturemagfilter0;
+    ushort texturewrapmodes0;
+    ushort texturewrapmodet0;
+    uint unknown05;
+    uint unknown06;
+    uint unknown07;
+    ushort textureid1;
+    ushort unknown08;
+    //...
+} MATS;
+
+typedef struct {
+    uint datalength;
+    ushort unknown00;
+    ushort unknown01;
+    ushort width;
+    ushort height;
+    uint format;
+    uint dataoffset;
+    char name[16];
+    //...
+} TEX;
+
+typedef struct {
     char magic[4];
     switch(magic){
         case "skl\x20":
@@ -30,7 +61,11 @@ typedef struct {
             break;
         case "qtrs":
         case "mats":
+            MATS mats;
+            break;
         case "tex\x20":
+            TEX tex;
+            break;
         case "sklm":
         case "luts":
         case "vatr":
